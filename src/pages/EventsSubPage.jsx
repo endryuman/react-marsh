@@ -7,7 +7,7 @@ export const EventsSubPage = () => {
   useEffect(() => {
     fetchEventById(id).then(setEvent);
   }, [id]);
-
+  console.log(event);
   return (
     <>
       {event && (
