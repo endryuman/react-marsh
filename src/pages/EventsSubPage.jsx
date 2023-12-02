@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchEventById } from 'servises/eventsApi';
+import { Link, useLocation } from 'react-router-dom';
+import { useFetchEvent } from '../hooks/useFatchEvent';
+
 export const EventsSubPage = () => {
-  const [event, setEvent] = useState(null);
-  const { id } = useParams();
-  useEffect(() => {
-    fetchEventById(id).then(setEvent);
-  }, [id]);
-  console.log(event);
+  const location = useLocation();
+  const event = useFetchEvent();
   return (
     <>
       {event && (
@@ -16,6 +12,9 @@ export const EventsSubPage = () => {
           <img width="200" alt={event.name} src={event.images[0].url} />
         </>
       )}
+      <Link to="details" state={location.state}>
+        More info
+      </Link>
     </>
   );
 };
